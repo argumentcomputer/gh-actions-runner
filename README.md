@@ -1,8 +1,7 @@
 # hello-docker-action
-Template for Dockerized GitHub Actions on self-hosted runners, using the following tutorials:
+Template for a Docker container defining a self-hosted runner, using the following tutorials:
 
-https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action#testing-out-your-action-in-a-workflow  
-https://marketplace.digitalocean.com/apps/docker
+https://baccini-al.medium.com/how-to-containerize-a-github-actions-self-hosted-runner-5994cc08b9fb
 
 ## Set up the droplet
 After logging in as root, run the following:
