@@ -15,7 +15,6 @@ jobs:
     name: Neptune test A
     steps:
       - uses: actions/checkout@v3
-      - uses: actions-rs/toolchain@v1
       - uses: Swatinem/rust-cache@v2
       - run: echo "Starting Neptune test A"
       - run: cargo test
@@ -24,7 +23,6 @@ jobs:
   #  name: Neptune test B
   #  steps:
   #    - uses: actions/checkout@v3
-  #    - uses: actions-rs/toolchain@v1
   #    - uses: Swatinem/rust-cache@v2
   #    - run: echo "Starting Neptune test B"
   #    - run: cargo test
