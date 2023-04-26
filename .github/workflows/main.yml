@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
-      - uses: taiki-e/install-action@nextest
       - uses: Swatinem/rust-cache@v2
       - run: echo "Starting Neptune test A"
       - run: cargo test
@@ -26,7 +25,6 @@ jobs:
   #  steps:
   #    - uses: actions/checkout@v3
   #    - uses: actions-rs/toolchain@v1
-  #    - uses: taiki-e/install-action@nextest
   #    - uses: Swatinem/rust-cache@v2
   #    - run: echo "Starting Neptune test B"
   #    - run: cargo test
