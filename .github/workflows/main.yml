@@ -1,8 +1,32 @@
+name: Neptune Tests
+
 on: [push]
 
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  RUST_BACKTRACE: short
+
 jobs:
-  hello_world_job:
+  test_a:
     runs-on: self-hosted
-    name: A job to say hello
+    name: Neptune test A
     steps:
-      - run: echo "Hello world!"
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+      - uses: taiki-e/install-action@nextest
+      - uses: Swatinem/rust-cache@v2
+      - run: echo "Starting Neptune test A"
+      - run: cargo test
+  #test_b:
+  #  runs-on: self-hosted
+  #  name: Neptune test B
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #    - uses: actions-rs/toolchain@v1
+  #    - uses: taiki-e/install-action@nextest
+  #    - uses: Swatinem/rust-cache@v2
+  #    - run: echo "Starting Neptune test B"
+  #    - run: cargo test
