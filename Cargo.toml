@@ -6,8 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-#neptune = { version = "9.0", features = ["cuda", "opencl"] }}
-neptune = "9.0"
+neptune = { version = "9.0", features = ["cuda", "opencl"] }}
 ff = "0.13.0"
 pasta_curves = "0.5"
 generic-array = "0.14.6"
