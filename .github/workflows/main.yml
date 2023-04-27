@@ -22,7 +22,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: nvcc --version
       - run: clinfo
-      - run: nvidia-smi
+        #- run: nvidia-smi
       - run: echo "Starting Neptune test A"
       - run: cargo test
   #test_b:
