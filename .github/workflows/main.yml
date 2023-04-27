@@ -21,8 +21,8 @@ jobs:
       - run: nvcc --version
       - run: clinfo
       - run: nvidia-smi
-        #- run: echo "Starting Neptune test A"
-        #- run: cargo test
+      - run: echo "Starting Neptune test A"
+      - run: cargo test
   #test_b:
   #  runs-on: self-hosted
   #  name: Neptune test B
