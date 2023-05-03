@@ -12,6 +12,7 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
 RUN nvcc --version
+RUN nvidia-smi
 RUN clinfo
 
 # Install Rust
