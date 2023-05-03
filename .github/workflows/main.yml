@@ -8,8 +8,9 @@ env:
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
   RUST_BACKTRACE: short
+  NVIDIA_VISIBLE_DEVICES: all
+  NVIDIA_DRIVER_CAPABILITIES: compute,utility
   EC_GPU_FRAMEWORK: cuda
-  EC_GPU_NUM_THREADS: 1
   EC_GPU_CUDA_NVCC_ARGS: "--fatbin --gpu-architecture=sm_86 --generate-code=arch=compute_86,code=sm_86"
 
 jobs:
