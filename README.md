@@ -1,5 +1,5 @@
 # GitHub Actions runner
-This repository contains a Docker container defining a self-hosted runner and an associated systemd service in `/server`. It is largely based on the following:
+This repository contains Docker images defining a self-hosted runner and an associated systemd service in `/bench-runner` and `/gpu-runner`. They are largely based on the following:
 
 https://github.com/myoung34/docker-github-actions-runner  
 https://baccini-al.medium.com/how-to-containerize-a-github-actions-self-hosted-runner-5994cc08b9fb
