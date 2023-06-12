@@ -1,13 +1,13 @@
 # Install with:
-#   sudo install -m 644 github-runner.service /etc/systemd/system/
+#   sudo install -m 644 gh-actions-runner.service /etc/systemd/system/
 #   sudo systemctl daemon-reload
-#   sudo systemctl enable github-runner
+#   sudo systemctl enable gh-actions-runner
 # Run with:
-#   sudo systemctl start github-runner
+#   sudo systemctl start gh-actions-runner
 # Stop with:
-#   sudo systemctl stop github-runner
+#   sudo systemctl stop gh-actions-runner
 # See live logs with:
-#   journalctl -f -u github-runner.service --no-hostname --no-tail
+#   journalctl -f -u gh-actions-runner.service --no-hostname --no-tail
 [Unit]
 Description=GitHub Actions Runner Container
 After=docker.service
@@ -17,12 +17,12 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %N
 ExecStartPre=-/usr/bin/docker rm %N
-ExecStartPre=-/usr/bin/docker pull samburnham/github-runner:latest
+ExecStartPre=-/usr/bin/docker pull lurklab/gh-actions-runner:latest
 ExecStart=/usr/bin/docker run --rm \
                               --env-file /etc/gh-actions-runner.env \
                               -e RUNNER_NAME=%H \
                               -v /var/run/docker.sock:/var/run/docker.sock \
                               --name %N \
-                              samburnham/github-runner:latest
+                              lurklab/gh-actions-runner:latest
 [Install]
 WantedBy=multi-user.target

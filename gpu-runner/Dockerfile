@@ -3,10 +3,11 @@ FROM myoung34/github-runner:ubuntu-jammy
 
 # Install CUDA and OpenCL
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
     nvidia-cuda-toolkit \
     clinfo \
     ocl-icd-dev \
+    ocl-icd-opencl-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
