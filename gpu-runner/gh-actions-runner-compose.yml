@@ -2,15 +2,23 @@
 #   sudo install -m 644 gh-actions-runner-compose.yml /etc
 services:
   worker:
-    image: lurklab/gh-actions-runner:latest
+    image: lurklab/gh-actions-runner-gpu:latest
+    runtime: nvidia
     environment:
       REPO_URL: ${REPO_URL}
       ACCESS_TOKEN: ${ACCESS_TOKEN}
       RUNNER_SCOPE: repo
       RUNNER_WORKDIR: /var/tmp/runner/work
-      LABELS: linux,x64,test
+      LABELS: linux,x64,gpu
       DISABLE_AUTO_UPDATE: 1
       EPHEMERAL: 1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, compute, utility]
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/var/tmp/runner:/var/tmp/runner'
