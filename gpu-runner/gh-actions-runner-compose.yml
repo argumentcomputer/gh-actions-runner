@@ -12,6 +12,7 @@ services:
       LABELS: linux,x64,gpu
       DISABLE_AUTO_UPDATE: 1
       EPHEMERAL: 1
+      LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
     deploy:
       resources:
         reservations:
@@ -19,6 +20,10 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu, compute, utility]
+    devices:
+      - "/dev/nvidiactl"
+      - "/dev/nvidia-uvm"
+      - "/dev/nvidia0"
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/var/tmp/runner:/var/tmp/runner'
