@@ -13,16 +13,23 @@ Description=GitHub Actions Runner Container
 After=docker.service
 Requires=docker.service
 [Service]
-TimeoutStartSec=0
+Environment="COMPOSE_FILE=/etc/gh-actions-runner-compose.yml" \
+            "ENV_FILE=/etc/gh-actions-runner.env"
+# Docker pull shouldn't take longer than 5 minutes
+TimeoutStartSec=5min
 Restart=always
-ExecStartPre=-/usr/bin/docker stop %N
-ExecStartPre=-/usr/bin/docker rm %N
-ExecStartPre=-/usr/bin/docker pull lurklab/gh-actions-runner:latest
-ExecStart=/usr/bin/docker run --rm \
-                              --env-file /etc/gh-actions-runner.env \
-                              -e RUNNER_NAME=%H \
-                              -v /var/run/docker.sock:/var/run/docker.sock \
-                              --name %N \
-                              lurklab/gh-actions-runner:latest
+ExecStartPre=-/usr/bin/docker compose \
+                      -f $COMPOSE_FILE \
+                      --env-file $ENV_FILE \
+                      stop %N
+ExecStartPre=-/usr/bin/docker compose \
+                        -f $COMPOSE_FILE \
+                        --env-file $ENV_FILE \
+                        rm %N
+ExecStart=/usr/bin/docker compose \
+                    -f $COMPOSE_FILE \
+                    --env-file $ENV_FILE \
+                    up --scale worker=4
 [Install]
 WantedBy=multi-user.target
+

@@ -8,7 +8,7 @@ ENV PATH="${PATH}:~/.cargo/bin"
 
 RUN rustc --version
 
-COPY entrypoint-wrapper.sh /
+COPY ../scripts/entrypoint-wrapper.sh /
 ENTRYPOINT ["/entrypoint-wrapper.sh"]
 CMD ["/actions-runner/bin/runsvc.sh"]
 VOLUME /var/tmp/runner
