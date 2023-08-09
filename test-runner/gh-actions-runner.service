@@ -29,6 +29,6 @@ ExecStartPre=-/usr/bin/docker compose \
 ExecStart=/usr/bin/docker compose \
                     -f $COMPOSE_FILE \
                     --env-file $ENV_FILE \
-                    up --scale worker=2
+                    up --scale worker=8
 [Install]
 WantedBy=multi-user.target
