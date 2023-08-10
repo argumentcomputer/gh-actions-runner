@@ -1,5 +1,5 @@
 # Use pre-configured GitHub runner action
-FROM lurklab/gh-actions-runner-cuda:dev
+FROM lurklab/gh-actions-runner-cuda:latest
 
 # Install CUDA and OpenCL
 RUN apt-get update && \
