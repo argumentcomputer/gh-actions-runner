@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>gh-actions-runner</string>
+    <key>ServiceDescription</key>
+    <string>GitHub Actions self-hosted runner</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+        <key>COMPOSE_FILE</key>
+        <string>/etc/gh-actions-runner-compose.yml</string>
+        <key>COMPOSE_FILE</key>
+        <string>/etc/gh-actions-runner.env</string>
+    </dict>
+    <key>StandardErrorPath</key>
+    <string>/tmp/local.job.err</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/local.job.out</string>
+    <key>Program</key>
+    <array>
+        <string>docker compose \
+                -f $COMPOSE_FILE \
+                --env-file $ENV_FILE \
+                stop gh-actions-runner
+        <string>docker compose \
+                -f $COMPOSE_FILE \
+                --env-file $ENV_FILE \
+                rm gh-actions-runner
+        <string>docker compose \
+                -f $COMPOSE_FILE \
+                --env-file $ENV_FILE \
+                up --scale worker=1
+    </array>
+    <key>RunAtLoad</key>
+    <boolean>true</boolean>
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <boolean>true</boolean>
+    </dict>
+</dict>
+</plist>
+
