@@ -7,7 +7,6 @@ RUN apt-get update && \
     clinfo \
     ocl-icd-dev \
     ocl-icd-opencl-dev \
-    gcc-10 g++-10 \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
