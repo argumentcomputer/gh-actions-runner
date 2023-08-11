@@ -1,5 +1,5 @@
 # Use pre-configured GitHub runner action
-FROM lurklab/gh-actions-runner-cuda:dev
+FROM lurklab/gh-actions-runner-cuda:latest
 
 # Install CUDA and OpenCL
 RUN apt-get update && \
@@ -7,7 +7,6 @@ RUN apt-get update && \
     clinfo \
     ocl-icd-dev \
     ocl-icd-opencl-dev \
-    gcc-10 g++-10 \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
