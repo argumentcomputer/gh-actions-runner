@@ -28,6 +28,11 @@ cd scripts
 - Run `./install.sh` to start the runners
 - Run `journalctl -f -u gh-actions-runner.service --no-hostname --no-tail` to inspect the log
 - Check the runners are connected to the desired GitHub repo by going to Settings->Actions->Runners
+- Run `crontab -e` and add the following lines:
+```
+0 0 1 * * /root/docker_cleanup.sh
+0 0 * * * /root/runner_cleanup.sh
+```
 
 ## GPU runner tutorial
 The GPU runner uses the following CUDA-enabled image: https://github.com/lurk-lab/github-actions-runner-cuda/tree/cuda

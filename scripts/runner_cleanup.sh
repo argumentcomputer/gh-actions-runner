@@ -6,4 +6,4 @@
 # 0 0 * * * ./runner_cleanup.sh
 
 # Remove all runner workdirs older than 1 day
-find /var/tmp/runner/_work/ -mindepth 1 -maxdepth 1 -type d -ctime +1 -exec rm -r {} \;
+find /var/tmp/runner/_work/ -mindepth 1 -maxdepth 1 -type d -mtime +1 -exec rm -r {} \;
