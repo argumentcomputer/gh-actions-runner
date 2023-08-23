@@ -9,6 +9,7 @@ RUN apt-get update && \
     ocl-icd-opencl-dev \
     ocl-icd-libopencl1 \
     opencl-headers \
+    pkg-config \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
