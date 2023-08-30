@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo sed -i "s/\#MaxRetentionSec.*/MaxRetentionSec=3d/" /etc/systemd/journald.conf
+sudo systemctl restart systemd-journald
+
 # Install Docker
 sudo apt update -y
 sudo apt-get install ca-certificates curl gnupg -y
@@ -14,3 +17,4 @@ sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 # Verify installation
 sudo docker run hello-world
+

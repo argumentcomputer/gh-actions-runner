@@ -1,5 +1,11 @@
 #!/bin/bash
 
+sudo sed -i "s/\#PasswordAuthentication.*/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo systemctl reload sshd
+
+sudo sed -i "s/\#MaxRetentionSec.*/MaxRetentionSec=3d/" /etc/systemd/journald.conf
+sudo systemctl restart systemd-journald
+
 # Hide kernel "pending upgrade" popup messages
 sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
 sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" /etc/needrestart/needrestart.conf

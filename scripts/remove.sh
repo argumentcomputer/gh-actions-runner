@@ -14,5 +14,3 @@ rm /usr/lib/systemd/system/gh-actions-runner.service # and symlinks that might b
 systemctl daemon-reload
 systemctl reset-failed
 
-# Optional
-#docker system prune -a

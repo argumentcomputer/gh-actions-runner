@@ -7,10 +7,16 @@ RUN apt-get update && \
     clinfo \
     ocl-icd-dev \
     ocl-icd-opencl-dev \
+    ocl-icd-libopencl1 \
+    opencl-headers \
+    pkg-config \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN nvcc --version
+
+RUN mkdir -p /etc/OpenCL/vendors && \
+    echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
