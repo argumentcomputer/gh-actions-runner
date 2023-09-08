@@ -2,14 +2,15 @@
 FROM lurklab/gh-actions-runner-cuda:latest
 
 # Install CUDA and OpenCL
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
     clinfo \
     ocl-icd-dev \
     ocl-icd-opencl-dev \
     ocl-icd-libopencl1 \
     opencl-headers \
     pkg-config \
+    libssl-dev \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
