@@ -1,10 +1,22 @@
 #!/bin/bash
 
-# Ensure GPU drivers are working
-nvidia-smi
+sudo sed -i "s/\#PasswordAuthentication.*/PasswordAuthentication no/" /etc/ssh/sshd_config
+sudo systemctl reload sshd
 
 sudo sed -i "s/\#MaxRetentionSec.*/MaxRetentionSec=3d/" /etc/systemd/journald.conf
 sudo systemctl restart systemd-journald
+
+# Hide kernel "pending upgrade" popup messages
+sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
+sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" /etc/needrestart/needrestart.conf
+
+# Don't install suggested or recommended packages
+sudo printf \
+"APT::Install-Suggests "0";\n\
+APT::Install-Recommends "0";" > /etc/apt/apt.conf.d/99Recommended
+
+# Lock kernel version to prevent issues with GPU drivers
+sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
 
 # Install Docker
 sudo apt update -y
@@ -20,6 +32,9 @@ sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 # Verify installation
 sudo docker run hello-world
+
+# Ensure GPU drivers are working
+nvidia-smi
 
 # Install Nvidia Container Toolkit
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \

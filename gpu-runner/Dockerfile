@@ -1,7 +1,7 @@
 # Use pre-configured GitHub runner action
 FROM lurklab/gh-actions-runner-cuda:latest
 
-# Install CUDA and OpenCL
+# Install OpenCL and Lurk dependencies
 RUN apt-get update \
     && apt-get install -y \
     clinfo \

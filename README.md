@@ -28,9 +28,9 @@ cd scripts
 - Run `./install.sh` to start the runners
 - Run `journalctl -f -u gh-actions-runner.service --no-hostname --no-tail` to inspect the log
 - Check the runners are connected to the desired GitHub repo by going to Settings->Actions->Runners
-- Run `crontab -e` and add the following lines:
+- Run `crontab -e` and add the following lines (depending on time zone in relation to UTC):
 ```
-0 0 1 * * /root/docker_cleanup.sh
+0 0 * * * /root/docker_cleanup.sh
 0 0 * * * /root/runner_cleanup.sh
 ```
 
@@ -38,10 +38,13 @@ cd scripts
 The GPU runner uses the following CUDA-enabled image: https://github.com/lurk-lab/github-actions-runner-cuda/tree/cuda
 
 The instructions are the same as above, with the following modifications:
-- Once logged into the server, run `nvidia-smi` to check the drivers are working
-- Don't run `apt update`/`apt upgrade`, as a new kernel version will break the GPU drivers
-- Run `./gpu_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
-    - Note: This script is specialized for a Vultr Nvidia GPU server on Ubuntu; behavior will likely vary with other GPU providers.
+- Once logged into the server, run `nvidia-smi` to check the drivers are working. If not, make sure to install them correctly
+- Individual runner
+  - Run `./gpu_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
+  - Note: untested, behavior will likely vary on other machines
+- Vultr Nvidia runner with Ubuntu;
+  - Don't run `apt update`/`apt upgrade`, as a new kernel version will break the GPU drivers
+  - Run `./vultr_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
 
 # Troubleshooting
 - Try restarting the `systemd` service with `systemctl restart gh-actions-runner`

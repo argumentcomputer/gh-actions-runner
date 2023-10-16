@@ -12,7 +12,6 @@ services:
       LABELS: linux,x64,gpu
       DISABLE_AUTO_UPDATE: 1
       EPHEMERAL: 1
-      LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libnvidia-ml.so
     deploy:
       resources:
         reservations:
