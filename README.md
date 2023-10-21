@@ -1,8 +1,10 @@
 # GitHub Actions runner
-This repository contains Docker images defining self-hosted runners and associated systemd services in `/test-runner`, `/bench-runner`, and `/gpu-runner`. They are largely based on the following:
+This repository contains Docker images defining self-hosted runners and associated systemd services in `/test-runner`, `/bench-runner`, and `/gpu-runner`. It is largely based on the following:
 
 https://github.com/myoung34/docker-github-actions-runner  
 https://baccini-al.medium.com/how-to-containerize-a-github-actions-self-hosted-runner-5994cc08b9fb
+
+Only Ubuntu 22.04 is supported, but it should work with some modifications on 18.04+.
 
 ## Test runner tutorial
 - Create a server on e.g. DigitalOcean
@@ -27,9 +29,10 @@ cd scripts
 - Optionally, edit `gh-actions-runner.service` to set the number of parallel workers with `--scale worker=<num>`
 - Run `./install.sh` to start the runners
 - Run `journalctl -f -u gh-actions-runner.service --no-hostname --no-tail` to inspect the log
-- Check the runners are connected to the desired GitHub repo by going to Settings->Actions->Runners
+- Check the runners are connected to the desired GitHub repo by going to `Settings->Actions->Runners`
 - Run `crontab -e` and add the following lines (depending on time zone in relation to UTC):
 ```
+# Can be less frequent if you have 100+ GB to spare
 0 0 * * * /root/docker_cleanup.sh
 0 0 * * * /root/runner_cleanup.sh
 ```
@@ -41,8 +44,8 @@ The instructions are the same as above, with the following modifications:
 - Once logged into the server, run `nvidia-smi` to check the drivers are working. If not, make sure to install them correctly
 - Individual runner
   - Run `./gpu_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
-  - Note: untested, behavior will likely vary on other machines
-- Vultr Nvidia runner with Ubuntu;
+  - Note: Tested on Paperspace, behavior may vary with other providers
+- Vultr Nvidia runner;
   - Don't run `apt update`/`apt upgrade`, as a new kernel version will break the GPU drivers
   - Run `./vultr_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
 

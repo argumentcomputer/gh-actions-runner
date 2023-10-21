@@ -36,9 +36,3 @@ sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
 sudo systemctl restart docker
 # Verify Docker has access to GPU drivers
 sudo docker run --rm --runtime=nvidia --gpus all nvidia/cuda:12.0.1-devel-ubuntu22.04 nvidia-smi
-
-sudo echo \
-	# This will create /dev/char symlinks to all device nodes \
-	ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="/usr/bin/nvidia-ctk system create-dev-char-symlinks --create-all" \
-	> /lib/udev/rules.d/71-nvidia-dev-char.rules
-sudo udevadm control --reload-rules && udevadm trigger
