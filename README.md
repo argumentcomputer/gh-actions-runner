@@ -42,6 +42,13 @@ The GPU runner uses the following CUDA-enabled image: https://github.com/lurk-la
 
 The instructions are the same as above, with the following modifications:
 - Once logged into the server, run `nvidia-smi` to check the drivers are working. If not, make sure to install them correctly
+  - One option is to install via `ubuntu-drivers` (tested on AWS and Paperspace)
+    ```
+    sudo apt install ubuntu-drivers-common
+    sudo ubuntu-drivers devices
+    sudo ubuntu-drivers autoinstall
+    ```
+    Then reboot and check `nvidia-smi` is working
 - Individual runner
   - Run `./gpu_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
   - Note: Tested on Paperspace, behavior may vary with other providers
