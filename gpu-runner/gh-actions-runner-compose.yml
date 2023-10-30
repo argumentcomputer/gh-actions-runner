@@ -9,7 +9,6 @@ services:
       ACCESS_TOKEN: ${ACCESS_TOKEN}
       RUNNER_SCOPE: repo
       RUNNER_WORKDIR: /var/tmp/runner/_work
-      LABELS: linux,x64,gpu
       DISABLE_AUTO_UPDATE: 1
       EPHEMERAL: 1
     deploy:
