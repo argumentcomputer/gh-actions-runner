@@ -8,18 +8,14 @@ mkdir -p /var/tmp/runner/_work
 RUNNER_DATE=$(date +"%y-%m-%d")
 head /dev/urandom | tr -dc a-f0-9 | head -c 13 | sed 's/$/-'$RUNNER_DATE'/' > /var/tmp/runner/_work/runner_id.txt
 _RUNNER_ID="$(cat /var/tmp/runner/_work/runner_id.txt)"
-# The name is a bit long, but there's no other way to give the runner a unique name with a scaled docker-compose runner
+# The name is a bit long, but there's no other way to give the runner a unique name when scaled with docker-compose
 RUNNER_NAME="${RUNNER_NAME}-${_RUNNER_ID}"
 RUNNER_WORKDIR="${RUNNER_WORKDIR}/${_RUNNER_ID}"
 
-# Get hardware info and append to labels
-LABELS=${LABELS},$(uname -ms)
-LABELS=${LABELS},$(grep '^model name' /proc/cpuinfo | head -1 | awk -F ': ' '{ print $2 }')
-LABELS=${LABELS},"$(nproc --all) vCPUs"
-LABELS=${LABELS},$(grep MemTotal /proc/meminfo | awk '{$2=$2/(1024^2); printf "%.2f GB RAM\n", $2;}')
+# Get basic hardware info and append to labels
+LABELS=${LABELS},$(uname -s),$(uname -m)
 if [ $(command -v nvidia-smi) ]; then
         LABELS=${LABELS},"gpu",$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits | tail -n 1)
-        LABELS=${LABELS},$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | tail -n 1 | awk '{$1=$1/1024; printf "%.2f GB GPU RAM\n", $1;}')
 fi
 # Add label for workdir/unique ID
 LABELS=${LABELS},${_RUNNER_ID}
