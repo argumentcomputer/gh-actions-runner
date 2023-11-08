@@ -8,7 +8,9 @@ services:
       REPO_URL: ${REPO_URL}
       ACCESS_TOKEN: ${ACCESS_TOKEN}
       RUNNER_SCOPE: repo
+      RUNNER_NAME: ${RUNNER_NAME}
       RUNNER_WORKDIR: /var/tmp/runner/_work
+      LABELS: ${LABELS}
       DISABLE_AUTO_UPDATE: 1
       EPHEMERAL: 1
     deploy:
