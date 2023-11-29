@@ -50,8 +50,11 @@ The instructions are the same as above, with the following modifications:
     ```
     Then reboot and check `nvidia-smi` is working
 - Individual runner
-  - Run `./gpu_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
-  - Note: Tested on Paperspace, behavior may vary with other providers
+  - Run `./gpu_setup.sh` instead of `setup.sh`
+    - Note: Tested on Paperspace, GCP, and AWS. Behavior may vary with other providers
+  - Optionally run `./nullfs.sh` for `lurk-rs` runners to disable public parameter caching
+  - Then run `./install.sh`
+  - Don't forget to add the cleanup cron jobs as with the test runner
 - Vultr Nvidia runner;
   - Don't run `apt update`/`apt upgrade`, as a new kernel version will break the GPU drivers
   - Run `./vultr_setup.sh` instead of `setup.sh`, and then `./install.sh` as usual
