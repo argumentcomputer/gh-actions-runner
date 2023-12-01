@@ -5,7 +5,7 @@
 # Install nullfs
 git clone https://github.com/abbbi/nullfsvfs.git
 cd nullfsvfs
-sudo apt-get install debhelper dkms
+sudo apt-get install debhelper dkms -y
 sudo dpkg-buildpackage -r
 # Update below version as needed
 sudo dpkg -i ../nullfsvfs_0.17_amd64.deb
