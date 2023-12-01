@@ -20,7 +20,7 @@ sudo mkdir -p /var/tmp/runner/lurk
 echo "none /var/tmp/runner/lurk nullfs default,uid=$NULLFS_UID,gid=$NULLFS_GID 0 0" | sudo tee -a /etc/fstab
 
 # Mount nullfs to the Docker runner
-echo "      - '/var/tmp/runner/lurk:/root/.lurk'" >> gh-actions-runner-compose.yml
+echo "      - '/var/tmp/runner/lurk:/root/.lurk'" >> ~/gh-actions-runner-compose.yml
 
 # Mount nullfs to the file system
 sudo mount -a
