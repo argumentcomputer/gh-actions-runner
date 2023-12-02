@@ -28,7 +28,7 @@ ExecStartPre=-/usr/bin/docker compose \
                         -f $COMPOSE_FILE \
                         --env-file $ENV_FILE \
                         rm %N
-#ExecStartPre=-rm -r /var/tmp/runner
+ExecStartPre=-rm -r /var/tmp/runner/*
 ExecStart=/usr/bin/docker compose \
                     -f $COMPOSE_FILE \
                     --env-file $ENV_FILE \
