@@ -19,13 +19,6 @@ RUN nvcc --version
 RUN mkdir -p /etc/OpenCL/vendors && \
     echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
-# Install Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-ENV PATH="${PATH}:/root/.cargo/bin"
-
-RUN rustc --version
-
 COPY entrypoint-wrapper.sh /
 ENTRYPOINT ["/entrypoint-wrapper.sh"]
 CMD ["/actions-runner/bin/runsvc.sh"]
