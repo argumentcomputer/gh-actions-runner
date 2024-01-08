@@ -11,6 +11,7 @@ RUN apt-get update \
     opencl-headers \
     pkg-config \
     libssl-dev \
+    bc \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
