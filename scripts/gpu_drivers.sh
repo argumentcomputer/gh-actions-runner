@@ -7,13 +7,15 @@ printf "APT::Install-Suggests "0";\nAPT::Install-Recommends "0";" >> /etc/apt/ap
 
 sudo apt-get update && sudo apt-get upgrade -y
 # Pin kernel version to prevent driver/kernel mismatches
-sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
+sudo apt-mark hold linux-generic
 
-sudo apt-get install ubuntu-drivers-common -y
-sudo ubuntu-drivers devices
-# Edit with the desired driver number based on `ubuntu-drivers devices`
-sudo ubuntu-drivers install 535
+# `alsa-utils` is needed to fix an `aplay` error when running `ubuntu-drivers devices`
+sudo apt-get install ubuntu-drivers-common alsa-utils -y
+# Edit with the desired driver version based on `ubuntu-drivers devices`
+NVIDIA_DRIVER_VERSION=$(sudo ubuntu-drivers devices | grep "recommended" | awk -F'-' '{ print $3 }')
+
+sudo ubuntu-drivers install $NVIDIA_DRIVER_VERSION
 # Pin driver version to prevent driver/kernel mismatches
-sudo apt-mark hold nvidia-driver-535
+sudo apt-mark hold nvidia-driver-$NVIDIA_DRIVER_VERSION
 
 # Then reboot and run `nvidia-smi`
